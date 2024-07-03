@@ -33,7 +33,6 @@ class Hotel:
         """Book a hotel by changing its availability to no"""
         self.data.loc[self.data['id'] == self.identification, 'available'] = 'no'
         self.data.to_csv('hotels.csv', index=False)
-        print('Is booked')
 
     def is_available(self):
         """Check if the hotel is available"""
@@ -53,11 +52,19 @@ class ReservationTicket:
         self.hotel = hotel
 
     def __str__(self):
-        return 'Manage, do and verify if the user have or not a reservation'
+        return 'Manage, plan and verify if the user have or not a reservation'
 
     def generate(self):
-        content = f'Name of the custumer hotel {self.user}'
+        content = f'''
+        Thank you for your reservation!
+        Here are you booking data:
+        Name: {self.user}
+        Hotel: {self.hotel}
+        '''
         return content
+
+    def cancel_ticket(self):
+        pass
 
 
 def main():
@@ -68,7 +75,7 @@ def main():
 
     if hotel.is_available():
         hotel.book()
-        reservation_ticket = ReservationTicket(user, hotel.name)
+        reservation_ticket = ReservationTicket(user.name.title(), hotel.name)
         print(reservation_ticket.generate())
     else:
         print('The Hotel is not available')
