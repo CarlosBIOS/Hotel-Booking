@@ -60,6 +60,10 @@ class ReservationTicket:
         else:
             print("Ok, so it's not booked the spa")
 
+    @property
+    def user(self):
+        return self.user.strip().title()
+
 
 class CreditCard:
 
